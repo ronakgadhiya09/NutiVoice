@@ -1,0 +1,7 @@
+streamlit
+groq
+pandas
+plotly
+python-dotenv
+SpeechRecognition
+pydub
