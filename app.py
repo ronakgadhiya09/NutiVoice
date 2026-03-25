@@ -39,6 +39,12 @@ div[data-testid="metric-container"]:hover {
 .stProgress > div > div > div > div {
     background-image: linear-gradient(to right, #00d2ff, #3a7bd5);
 }
+div[data-testid="stMetricValue"] {
+    font-size: 1.9rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+}
 </style>
 """,
     unsafe_allow_html=True,
@@ -235,7 +241,7 @@ with col2:
     total_carbs = sum(float(r.get("Carbs", 0) or 0) for r in rows)
     total_fats = sum(float(r.get("Fats", 0) or 0) for r in rows)
 
-    col_c, col_p, col_cb, col_f = st.columns(4)
+    col_c, col_p, col_cb, col_f = st.columns([1.35, 1, 1, 1])
     col_c.metric("Calories", f"{total_cals:.0f} / {g['Calories']}")
     col_p.metric("Protein (g)", f"{total_protein:.0f} / {g['Protein']}")
     col_cb.metric("Carbs (g)", f"{total_carbs:.0f} / {g['Carbs']}")
@@ -302,7 +308,8 @@ else:
         xaxis_title="Date",
         yaxis_title="kcal",
     )
-    st.plotly_chart(fig2, width="stretch")
+    with st.expander("Daily calories vs goal", expanded=False):
+        st.plotly_chart(fig2, width="stretch")
 
     fig3 = go.Figure()
     fig3.add_scatter(
@@ -327,7 +334,8 @@ else:
         xaxis_title="Date",
         yaxis_title="g",
     )
-    st.plotly_chart(fig3, width="stretch")
+    with st.expander("Daily protein vs goal", expanded=False):
+        st.plotly_chart(fig3, width="stretch")
 
 st.divider()
 st.subheader("Insights & suggestions")

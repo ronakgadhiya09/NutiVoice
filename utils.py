@@ -24,10 +24,13 @@ Example:
 """
 
 ESTIMATE_BATCH_PROMPT = """You estimate nutrition for each food item. Return ONLY JSON with key "items".
-Each item must have: "Name" (display string with quantity), "quantity", "unit", "Calories" (int),
-"Protein", "Carbs", "Fats" (numbers in grams, can be decimals).
-
-Use reasonable portions for the given quantity and unit.
+Each item must have: "Name", "quantity", "unit", "Calories" (int), "Protein", "Carbs", "Fats".
+Rules:
+- Keep values realistic for cooked food portions.
+- Ensure calorie consistency: Calories ~= Protein*4 + Carbs*4 + Fats*9.
+- Avoid impossible precision: use 1 decimal max for macros.
+- Indian rich gravies (e.g., paneer butter masala) are typically fat-heavy.
+- Sugary soft drinks (e.g., coke) should be mostly carbs, near-zero protein/fat.
 """
 
 
