@@ -5,3 +5,5 @@ plotly
 python-dotenv
 SpeechRecognition
 pydub
+requests
+pytest
